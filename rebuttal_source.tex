@@ -1,0 +1,113 @@
+% LaTeX advanced rebuttal letter example. 
+% 
+%
+% Copyright 2023 Matteo Fontana.
+%
+% Based heavily on work by Friedemann Zenke, fzenke.net
+%
+% Based on examples by Dirk Eddelbuettel, Fran and others from 
+% https://tex.stackexchange.com/questions/2317/latex-style-or-macro-for-detailed-response-to-referee-report
+% 
+% Licensed under cc by-sa 3.0 with attribution required.
+% See https://creativecommons.org/licenses/by-sa/3.0/
+% and https://stackoverflow.blog/2009/06/25/attribution-required/
+
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+\usepackage{natbib}
+\bibliographystyle{unsrtnat}
+
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bbm,amsthm,amsmath,amsfonts,amssymb}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{float}
+
+\newcommand{\virgolette}[1]{``\emph{#1}''}
+
+
+
+% \usepackage{biblatex}
+% \addbibresource{../bibliography.bib}
+
+% import Eq and Section references from the main manuscript where needed
+% \usepackage{xr}
+% \externaldocument{manuscript}
+
+% package needed for optional arguments
+\usepackage{xifthen}
+% define counters for reviewers and their points
+\newcounter{reviewer}
+\setcounter{reviewer}{0}
+\newcounter{point}[reviewer]
+\setcounter{point}{0}
+\newcounter{ae}
+\setcounter{ae}{0}
+\newcounter{aepoint}[ae]
+\setcounter{aepoint}{0}
+
+% This refines the format of how the reviewer/point reference will appear.
+\renewcommand{\thepoint}{P\,\thereviewer.\arabic{point} } 
+\renewcommand{\theaepoint}{P\,\theae.\arabic{aepoint} } 
+
+% command declarations for reviewer points and our responses
+%This is reviewer points
+\newcommand{\reviewersection}{\stepcounter{reviewer} \bigskip \hrule
+                  \section*{Reviewer \thereviewer}}
+
+\newenvironment{point}
+   {\refstepcounter{point} \bigskip \noindent {\textbf{Reviewer~Point~\thepoint} } ---\ }
+   {\par }
+
+\newcommand{\shortpoint}[1]{\refstepcounter{point}  \bigskip \noindent 
+	{\textbf{Reviewer~Point~\thepoint} } ---~#1\par }
+
+
+%introduce an associate editor points environment too
+\renewcommand{\theaepoint}{P\,\theae.\arabic{aepoint} }
+
+\newcommand{\aersection}{\stepcounter{ae} \bigskip \hrule
+                  \section*{Associate~Editor}}
+%use following row if you want numbered associate editor sections
+%                  \section*{Associate~Editor~\theaepoint}}
+
+
+\newenvironment{aepoint}
+   {\refstepcounter{aepoint} \bigskip \noindent {\textbf{Associate Editor~Point~\theaepoint} } ---\ }
+   {\par }
+
+
+\newenvironment{reply}
+   {\medskip \noindent \begin{sf}\textbf{Reply}:\  }
+   {\medskip \end{sf}}
+
+\newcommand{\shortreply}[2][]{\medskip \noindent \begin{sf}\textbf{Reply}:\  #2
+	\ifthenelse{\equal{#1}{}}{}{ \hfill \footnotesize (#1)}%
+	\medskip \end{sf}}
+
+\newcommand{\aesection}{\stepcounter{ae} \bigskip \hrule
+                  \section*{Associate Editor}}
+
+\begin{document}
+\section*{TITLE}
+Dear EDITORNAME
+
+We are very thankful that \textit{JOURNALNAME} is giving us the opportunity to revise and resubmit our work. We have taken great care in addressing with thoroughness and precision the concerns raised by your panel of reviewers and by the Associate Editor, and we feel that the overall quality, depth and impact potential of the work have remarkably increased. We indeed sincerely thanked the two anonymous reviewers and the Associate Editor in the Acknowledgements. In almost all cases we agreed on the suggestions and properly implemented them. We provide a point by point answer to all the comments. We report the review letters in full, and the answers to the specific points are typed in \begin{sf}Sans Serif\end{sf}.
+
+\bigskip
+Kind regards,
+
+%\bigskip
+Dr. Matteo Fontana
+
+\pagebreak
+\aesection
+\reviewersection
+\reviewersection
+
+\end{document}
